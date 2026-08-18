@@ -4,15 +4,19 @@
 <!-- ============ SETUP ============
      Files next to this file:
        logo.png  = badge
-       photo1.jpg = cuddle on sofa (ring)      → gallery
-       photo2.jpg = embrace at wooden door     → gallery
-       photo3.jpg = standing couple            → closing shot
-       photo4.jpg = laughing on sofa           → hero
-       photo5.jpg = Tina solo (mirror chair)   → "The Two of Us"
-       photo6.jpg = Temple solo (archway)      → "The Two of Us"
-     ALSO DO THIS (2 min): Google Form → Settings → Presentation →
-     Confirmation message → paste:
-     Thank you! Your RSVP is in 💚 To bless the union:
+       photo1.jpg = cuddle on sofa (ring)   → gallery "the ring"
+       photo2.jpg = embrace at wooden door  → gallery "the embrace"
+       photo3.jpg = standing couple         → closing shot
+       photo4.jpg = laughing on sofa        → hero
+       photo5.jpg = Tina solo               → gallery "the bride"
+       photo6.jpg = Temple solo             → gallery "the groom"
+
+     SPEED: compress every photo first (squoosh.app / tinypng.com):
+       resize 1600px wide (hero/closing) or 1200px (gallery), quality ~78.
+       Keep same filenames. ~30MB → ~2MB, loads in seconds on phone data.
+
+     GOOGLE FORM (2 min): Settings → Presentation → Confirmation message →
+     paste: Thank you! Your RSVP is in 💚 To bless the union:
      FCMB 1018555347 (Celestina Paul) · UBA 2094396896 (Kpoeloo Temple David)
      VERIFY FCMB digits with client before sharing.
 ================================= -->
@@ -98,20 +102,14 @@
   .addr small{display:block;font-size:.8rem;letter-spacing:.08em;opacity:.8}
   .card p.note{color:var(--muted);font-size:1.05rem;margin-top:.5rem}
 
-  /* ---------- gallery (couple diptych) ---------- */
+  /* ---------- gallery (4 pics + captions) ---------- */
   .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
   @media(max-width:620px){.gallery{grid-template-columns:1fr}}
   .gallery figure{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--line);margin:0}
   .gallery img{width:100%;height:clamp(320px,56vh,600px);object-fit:cover;transition:transform .6s ease}
   .gallery figure:hover img{transform:scale(1.04)}
-
-  /* ---------- solos: him & her ---------- */
-  .solos{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;max-width:920px;margin:0 auto}
-  @media(max-width:620px){.solos{grid-template-columns:1fr}}
-  .solo figure{overflow:hidden;border-radius:18px;border:1px solid var(--line);box-shadow:0 18px 46px rgba(57,65,74,.12)}
-  .solo img{width:100%;height:clamp(380px,62vh,660px);object-fit:cover;object-position:center 22%;transition:transform .6s ease}
-  .solo figure:hover img{transform:scale(1.03)}
-  .solo-name{font-family:var(--script);font-size:2.2rem;color:var(--brown);text-align:center;margin-top:1rem}
+  .gallery .cap{position:absolute;left:0;right:0;bottom:0;padding:2.2rem 1rem .9rem;text-align:center;
+    font-family:var(--script);font-size:1.6rem;color:#fff;background:linear-gradient(transparent,rgba(40,24,12,.68))}
 
   /* ---------- closing portrait ---------- */
   .closing{max-width:860px;margin:0 auto;text-align:center}
@@ -191,7 +189,7 @@
 
   <!-- ===== LOGO COVER ===== -->
   <section class="cover" id="cover">
-    <img class="emblem reveal" src="logo.png" alt="Tina weds Temple — September 19th 2026 monogram badge">
+    <img class="emblem" src="logo.png" fetchpriority="high" alt="Tina weds Temple — September 19th 2026 monogram badge">
     <a class="scroll-cue" href="#welcome">Scroll<span></span></a>
   </section>
 
@@ -199,7 +197,7 @@
   <section class="block" id="welcome" style="padding-top:4rem">
     <div class="hero-photo reveal">
       <figure>
-        <img src="photo4.jpg" alt="Tina and Temple laughing together on a cream sofa">
+        <img src="photo4.jpg" fetchpriority="high" alt="Tina and Temple laughing together on a cream sofa">
         <figcaption>
           <p class="names">Tina <span class="amp">&amp;</span> Temple</p>
           <p class="date-line">Saturday, the 19th of September, 2026</p>
@@ -240,7 +238,7 @@
     </div>
   </section>
 
-  <!-- ===== GALLERY (couple) ===== -->
+  <!-- ===== GALLERY — 4 pics with captions ===== -->
   <section class="block" id="gallery">
     <header class="sec-head reveal">
       <h2 class="sec-title">Gallery</h2>
@@ -248,27 +246,22 @@
       <p class="sec-sub">A few favourites</p>
     </header>
     <div class="gallery">
-      <figure class="reveal"><img src="photo1.jpg" alt="Tina and Temple cuddling on a cream sofa, Tina showing her ring"></figure>
-      <figure class="reveal"><img src="photo2.jpg" alt="Temple embracing Tina from behind in front of a wooden door"></figure>
-    </div>
-  </section>
-
-  <!-- ===== THE TWO OF US (solos) ===== -->
-  <section class="block">
-    <header class="sec-head reveal">
-      <h2 class="sec-title">The Two of Us</h2>
-      <div class="orn" aria-hidden="true"><i></i></div>
-      <p class="sec-sub">the bride &amp; the groom</p>
-    </header>
-    <div class="solos">
-      <div class="solo reveal">
-        <figure><img src="photo5.jpg" alt="Tina, radiant in her solo portrait"></figure>
-        <p class="solo-name">Tina</p>
-      </div>
-      <div class="solo reveal">
-        <figure><img src="photo6.jpg" alt="Temple, cool in white, leaning by the archway"></figure>
-        <p class="solo-name">Temple</p>
-      </div>
+      <figure class="reveal">
+        <img src="photo1.jpg" loading="lazy" decoding="async" alt="Tina and Temple cuddling on a cream sofa, Tina showing her ring">
+        <figcaption class="cap">the ring</figcaption>
+      </figure>
+      <figure class="reveal">
+        <img src="photo2.jpg" loading="lazy" decoding="async" alt="Temple embracing Tina from behind in front of a wooden door">
+        <figcaption class="cap">the embrace</figcaption>
+      </figure>
+      <figure class="reveal">
+        <img src="photo5.jpg" loading="lazy" decoding="async" alt="Tina, radiant in her solo portrait">
+        <figcaption class="cap">the bride</figcaption>
+      </figure>
+      <figure class="reveal">
+        <img src="photo6.jpg" loading="lazy" decoding="async" alt="Temple, cool in white, leaning by the archway">
+        <figcaption class="cap">the groom</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -281,7 +274,7 @@
     </header>
     <p class="rsvp-intro reveal">Kindly reply as soon as you can.<br>Can't make it? Let us know below — you're still very welcome to send a gift.</p>
     <div class="rsvp-frame reveal">
-      <iframe class="gform"
+      <iframe class="gform" loading="lazy"
         src="https://docs.google.com/forms/d/e/1FAIpQLScbVvM2p-i-fOaLGFrtKmqla0Aq7mELYM_YNHDWCKd2JFL2Og/viewform?embedded=true"
         title="Tina and Temple wedding RSVP form">Loading…</iframe>
     </div>
@@ -331,7 +324,7 @@
   <!-- ===== CLOSING PORTRAIT ===== -->
   <section class="block">
     <div class="closing reveal">
-      <div class="frame"><img src="photo3.jpg" alt="Tina and Temple, elegant and poised, standing together"></div>
+      <div class="frame"><img src="photo3.jpg" loading="lazy" decoding="async" alt="Tina and Temple, elegant and poised, standing together"></div>
       <p class="hashtag">#TinaFoundHerTemple</p>
     </div>
   </section>
