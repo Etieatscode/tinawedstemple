@@ -13,12 +13,13 @@
 
      SPEED: compress every photo first (squoosh.app / tinypng.com):
        resize 1600px wide (hero/closing) or 1200px (gallery), quality ~78.
-       Keep same filenames. ~30MB → ~2MB, loads in seconds on phone data.
 
      GOOGLE FORM (2 min): Settings → Presentation → Confirmation message →
      paste: Thank you! Your RSVP is in 💚 To bless the union:
      FCMB 1018555347 (Celestina Paul) · UBA 2094396896 (Kpoeloo Temple David)
-     VERIFY FCMB digits with client before sharing.
+
+     OFFICIAL DETAILS (per client): Church 9am · Reception 2pm ·
+     Colours: Burgundy, Olive, Beige · Access cards admit 1 guest.
 ================================= -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -94,15 +95,16 @@
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:2.3rem 1.6rem;text-align:center;box-shadow:0 14px 40px rgba(57,65,74,.07)}
   .card .glyph{color:var(--olive);font-size:1.1rem}
   .card h3{font-family:var(--caps);font-size:.8rem;letter-spacing:.26em;text-transform:uppercase;color:var(--brown);margin:.7rem 0 .4rem}
-  .card .big{font-family:var(--script);font-size:2.5rem;line-height:1.2;color:var(--olive-deep)}
+  .card .big{font-family:var(--script);font-size:2.3rem;line-height:1.25;color:var(--olive-deep)}
   .venue{display:inline-block;margin-top:.5rem;font-weight:600;font-size:1.1rem;color:var(--olive-deep);
     text-decoration:underline;text-decoration-color:rgba(95,113,65,.45);text-underline-offset:5px}
   .venue:hover{color:var(--brown);text-decoration-color:var(--brown)}
   .addr{color:var(--muted);font-size:.98rem;margin-top:.35rem}
   .addr small{display:block;font-size:.8rem;letter-spacing:.08em;opacity:.8}
   .card p.note{color:var(--muted);font-size:1.05rem;margin-top:.5rem}
+  .fine-note{text-align:center;margin-top:2.2rem;font-family:var(--caps);font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted)}
 
-  /* ---------- gallery (4 pics + captions) ---------- */
+  /* ---------- gallery ---------- */
   .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
   @media(max-width:620px){.gallery{grid-template-columns:1fr}}
   .gallery figure{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--line);margin:0}
@@ -212,7 +214,7 @@
     </div>
   </section>
 
-  <!-- ===== DETAILS ===== -->
+  <!-- ===== DETAILS (official) ===== -->
   <section class="block" id="details">
     <header class="sec-head reveal">
       <h2 class="sec-title">Details</h2>
@@ -221,24 +223,25 @@
     </header>
     <div class="cards">
       <div class="card reveal">
-        <span class="glyph">✦</span><h3>Ceremony · 4:00 pm</h3>
-        <a class="venue" href="https://maps.app.goo.gl/2fA1BpRQnWEGMkJH8?g_st=ac" target="_blank" rel="noopener">The Apostolic Church Nigeria, Rumuomasi Assembly</a>
-        <p class="addr">1 Uyo Street, Rumuomasi, Port Harcourt<small>tap the name to open the map</small></p>
+        <span class="glyph">✦</span><h3>Church Service · 9:00 am</h3>
+        <a class="venue" href="https://maps.app.goo.gl/2fA1BpRQnWEGMkJH8?g_st=ac" target="_blank" rel="noopener">The Apostolic Church</a>
+        <p class="addr">No. 1 Uyo Street, Rumuomasi, Port Harcourt<small>tap the name to open the map</small></p>
       </div>
       <div class="card reveal">
-        <span class="glyph">✦</span><h3>Reception · 6:30 pm</h3>
-        <a class="venue" href="https://maps.app.goo.gl/NZPhMeHZT9mfpjk67?g_st=ac" target="_blank" rel="noopener">Fomida Events &amp; Business Center</a>
-        <p class="addr">15 Odara Nwere St, Mgbuoba, Port Harcourt<small>tap the name to open the map</small></p>
+        <span class="glyph">✦</span><h3>Reception · 2:00 pm</h3>
+        <a class="venue" href="https://maps.app.goo.gl/NZPhMeHZT9mfpjk67?g_st=ac" target="_blank" rel="noopener">Fomida Event Center</a>
+        <p class="addr">No. 15 Odaranwere Road, off NTA Road, Port Harcourt<small>tap the name to open the map</small></p>
       </div>
       <div class="card reveal">
-        <span class="glyph">✦</span><h3>Attire</h3>
-        <p class="big">Garden Formal</p>
-        <p class="note">Soft neutrals &amp; sage tones welcome. No stilettos on the lawn.</p>
+        <span class="glyph">✦</span><h3>Colours of the Day</h3>
+        <p class="big">Burgundy · Olive · Beige</p>
+        <p class="note">Wear your favourite shade of the three.</p>
       </div>
     </div>
+    <p class="fine-note reveal">Access cards admit only one (1) guest</p>
   </section>
 
-  <!-- ===== GALLERY — 4 pics with captions ===== -->
+  <!-- ===== GALLERY ===== -->
   <section class="block" id="gallery">
     <header class="sec-head reveal">
       <h2 class="sec-title">Gallery</h2>
