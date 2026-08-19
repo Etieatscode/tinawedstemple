@@ -2,16 +2,20 @@
 <html lang="en">
 <head>
 <!-- ============ SETUP ============
-     Files next to this file: logo.png, photo1.jpg … photo6.jpg
-     (compress photos first: squoosh.app — 1600px wide, quality ~78)
+     Files next to this file:
+       logo.png   = badge
+       photo1.jpg = cuddle on sofa (ring)      → gallery "the ring"
+       photo2.jpg = embrace at wooden door     → gallery "the embrace"
+       photo3.jpg = SCH_1386 standing portrait → gallery wide tile "the pose"
+       photo4.jpg = laughing on sofa           → CLOSING shot (last picture)
+       photo5.jpg = Tina solo                  → gallery "the bride"
+       photo6.jpg = Temple solo                → gallery "the groom"
+       photo7.jpg = THE KISS PHOTO (new)       → hero
+     If a file is missing the hero falls back to the badge (no broken icon).
 
-     RSVP is WIRED: submits invisibly into the Google Form/Sheet (no redirect).
-     TEST IT: fill the form on the site → a row must appear in her Responses tab.
-     If "Can you attend" ever shows blank in the Sheet, adjust the number of
-     spaces inside the first <option> of the attend select (Google option text).
-
-     PHOTO ALBUM: new Google Form: "Your name" + "Your table number (optional)"
-     + "Your pictures (max 2)" (FILE UPLOAD, max 2) → paste its link over PHOTO_FORM_URL.
+     RSVP wired to the Google Sheet. If her form questions are ever edited
+     again, regenerate the pre-filled link and update the CODES below.
+     PHOTO_ALBUM: paste photo-upload form link over PHOTO_FORM_URL when ready.
 ================================= -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +24,7 @@
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#f5f8fb; --card:#fdfdfb; --ink:#39414a; --muted:#6d7580;
@@ -54,8 +58,8 @@
   @keyframes drop{0%,100%{transform:scaleY(.4);opacity:.4}50%{transform:scaleY(1);opacity:1}}
 
   .hero-photo{position:relative;max-width:1100px;margin:0 auto;padding:0 1.25rem}
-  .hero-photo figure{position:relative;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(57,65,74,.18)}
-  .hero-photo img{width:100%;height:clamp(420px,72vh,760px);object-fit:cover;object-position:center 28%}
+  .hero-photo figure{position:relative;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(57,65,74,.18);background:var(--cream)}
+  .hero-photo img{width:100%;height:clamp(420px,72vh,760px);object-fit:cover;object-position:center 30%}
   .hero-photo figcaption{position:absolute;left:0;right:0;bottom:0;padding:3rem 1.5rem 1.6rem;text-align:center;
     background:linear-gradient(transparent,rgba(40,24,12,.72));color:#fff}
   .hero-photo .names{font-family:var(--script);font-weight:400;font-size:clamp(3rem,9vw,5.5rem);line-height:1.1}
@@ -88,7 +92,7 @@
   .addr{color:var(--muted);font-size:.98rem;margin-top:.35rem}
   .addr small{display:block;font-size:.8rem;letter-spacing:.08em;opacity:.8}
   .card p.note{color:var(--muted);font-size:1.05rem;margin-top:.5rem}
-  .fine-note{text-align:center;margin-top:2.2rem;font-family:var(--caps);font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--burg)}
+  .fine-note{text-align:center;margin-top:2.2rem;font-family:var(--caps);font-weight:700;font-size:.74rem;letter-spacing:.26em;text-transform:uppercase;color:var(--burg)}
   .swatches{display:flex;justify-content:center;gap:1.8rem;margin-top:1.1rem}
   .sw{display:grid;justify-items:center;gap:.45rem}
   .sw .chip{width:46px;height:46px;border-radius:10px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)}
@@ -97,7 +101,9 @@
   .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
   @media(max-width:620px){.gallery{grid-template-columns:1fr}}
   .gallery figure{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--line);margin:0}
+  .gallery figure.wide{grid-column:1/-1}
   .gallery img{width:100%;height:clamp(320px,56vh,600px);object-fit:cover;transition:transform .6s ease}
+  .gallery figure.wide img{height:clamp(360px,64vh,680px)}
   .gallery figure:hover img{transform:scale(1.04)}
   .gallery .cap{position:absolute;left:0;right:0;bottom:0;padding:2.2rem 1rem .9rem;text-align:center;
     font-family:var(--script);font-size:1.6rem;color:#fff;background:linear-gradient(transparent,rgba(40,24,12,.68))}
@@ -118,9 +124,6 @@
     border:1px solid var(--line);border-radius:10px;padding:.65em .85em;width:100%;transition:border-color .2s,box-shadow .2s}
   input:focus,select:focus,textarea:focus{outline:none;border-color:var(--olive);box-shadow:0 0 0 3px rgba(95,113,65,.16)}
   textarea{resize:vertical;min-height:88px}
-  .checks{display:flex;gap:1.4rem;padding:.4rem 0}
-  .check-row{display:flex;align-items:center;gap:.55em;font-family:var(--serif);font-size:1.05rem;letter-spacing:0;text-transform:none;color:var(--ink)}
-  .check-row input{width:auto;accent-color:var(--olive)}
   .submit{justify-self:center;margin-top:.4rem}
   .form-status{text-align:center;font-family:var(--caps);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--olive);min-height:1.2em}
   .form-help{margin-top:1.4rem;text-align:center;font-size:1rem;color:var(--muted)}
@@ -160,10 +163,11 @@
   .reg-card a:hover{color:var(--olive-deep)}
   .reg-card p{color:var(--muted);font-size:1rem}
 
+  /* closing — photo4 last, hashtag exactly as written */
   .closing{max-width:860px;margin:0 auto;text-align:center}
   .closing .frame{border-radius:22px;overflow:hidden;box-shadow:0 24px 60px rgba(57,65,74,.18)}
-  .closing img{width:100%;height:clamp(460px,86vh,900px);object-fit:cover;object-position:center 20%}
-  .hashtag{font-family:var(--caps);font-size:.8rem;letter-spacing:.34em;text-transform:uppercase;color:var(--olive);margin-top:1.4rem}
+  .closing img{width:100%;height:clamp(460px,86vh,900px);object-fit:cover;object-position:center 25%}
+  .hashtag{font-family:var(--serif);font-style:italic;font-weight:600;font-size:1.25rem;letter-spacing:.06em;color:var(--olive-deep);margin-top:1.4rem}
 
   footer{text-align:center;padding:4.5rem 1.25rem 3.5rem;border-top:1px solid var(--line)}
   footer .sign{font-family:var(--script);font-size:2.1rem;color:var(--brown)}
@@ -198,10 +202,11 @@
     <a class="scroll-cue" href="#welcome">Scroll<span></span></a>
   </section>
 
+  <!-- ===== HERO — the kiss photo ===== -->
   <section class="block" id="welcome" style="padding-top:4rem">
     <div class="hero-photo reveal">
       <figure>
-        <img src="photo4.jpg" fetchpriority="high" alt="Tina and Temple laughing together on a cream sofa">
+        <img id="heroImg" src="photo7.jpg" fetchpriority="high" alt="Tina and Temple sharing a kiss, ring on show">
         <figcaption>
           <p class="names">Tina <span class="amp">&amp;</span> Temple</p>
           <p class="date-line">Saturday, the 19th of September, 2026</p>
@@ -257,6 +262,7 @@
       <figure class="reveal"><img src="photo2.jpg" loading="lazy" decoding="async" alt="Temple embracing Tina from behind in front of a wooden door"><figcaption class="cap">the embrace</figcaption></figure>
       <figure class="reveal"><img src="photo5.jpg" loading="lazy" decoding="async" alt="Tina, radiant in her solo portrait"><figcaption class="cap">the bride</figcaption></figure>
       <figure class="reveal"><img src="photo6.jpg" loading="lazy" decoding="async" alt="Temple, cool in white, leaning by the archway"><figcaption class="cap">the groom</figcaption></figure>
+      <figure class="wide reveal"><img src="photo3.jpg" loading="lazy" decoding="async" alt="Tina and Temple, elegant and poised, standing together"><figcaption class="cap">the pose</figcaption></figure>
     </div>
   </section>
 
@@ -273,7 +279,6 @@
     </div>
   </section>
 
-  <!-- ===== RSVP — wired straight into the Google Sheet, no redirect ===== -->
   <section class="block" id="rsvp">
     <header class="sec-head reveal">
       <h2 class="sec-title">RSVP</h2>
@@ -292,10 +297,12 @@
           </select>
         </label>
         <label>Which event will you attend?
-          <span class="checks">
-            <label class="check-row"><input type="checkbox" data-key="event" value="Ceremony"> Ceremony</label>
-            <label class="check-row"><input type="checkbox" data-key="event" value="Reception"> Reception</label>
-          </span>
+          <select data-key="event" required>
+            <option value="" disabled selected>Select</option>
+            <option>Church Joining</option>
+            <option>Reception</option>
+            <option>Both</option>
+          </select>
         </label>
         <label>Who's guest are you?
           <select data-key="side" required>
@@ -304,7 +311,7 @@
             <option>Groom side (Temple)</option>
           </select>
         </label>
-        <label>Comments and/or questions (optional)<textarea data-key="comments" placeholder="Say something nice…"></textarea></label>
+        <label>Comments / Questions or Goodwill messages to the couple (optional)<textarea data-key="comments" placeholder="Say something nice…"></textarea></label>
         <button class="btn primary submit" type="submit">Send RSVP</button>
         <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
       </form>
@@ -350,9 +357,10 @@
     </div>
   </section>
 
+  <!-- ===== CLOSING — photo4 is the last picture on the page ===== -->
   <section class="block">
     <div class="closing reveal">
-      <div class="frame"><img src="photo3.jpg" loading="lazy" decoding="async" alt="Tina and Temple, elegant and poised, standing together"></div>
+      <div class="frame"><img src="photo4.jpg" loading="lazy" decoding="async" alt="Tina and Temple laughing together on a cream sofa"></div>
       <p class="hashtag">#TinaFoundHerTemple</p>
     </div>
   </section>
@@ -364,10 +372,12 @@
 </footer>
 
 <script>
+  // Hero safety net: missing file → badge instead of broken icon
+  document.getElementById('heroImg').addEventListener('error', function(){ this.onerror=null; this.src='logo.png'; });
+
   const PHOTO_FORM_URL = "#"; // ← paste photo-upload form link here when ready
   if (PHOTO_FORM_URL !== "#") document.getElementById('photoLink').href = PHOTO_FORM_URL;
 
-  // Hard-wired from the pre-filled link — submits straight into her Sheet
   const FORM_RESPONSE = "https://docs.google.com/forms/d/e/1FAIpQLScbVvM2p-i-fOaLGFrtKmqla0Aq7mELYM_YNHDWCKd2JFL2Og/formResponse";
   const CODES = {
     attend:  "entry.877086558",
@@ -376,20 +386,20 @@
     side:    "entry.2009011009",
     comments:"entry.2606285"
   };
+  // Guest sees her wording; Google receives the options its form actually has
+  const EVENT_MAP = { "Church Joining":["Ceremony"], "Reception":["Reception"], "Both":["Ceremony","Reception"] };
 
   const form = document.getElementById('rsvpForm');
   const status = document.getElementById('formStatus');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const events = [...form.querySelectorAll('[data-key="event"]:checked')].map(c => c.value);
-    if (!events.length) { status.textContent = 'Please tick Ceremony or Reception (or both)'; return; }
     status.textContent = 'Sending…';
     const fd = new FormData();
     fd.append(CODES.names,   form.querySelector('[data-key="names"]').value);
     fd.append(CODES.attend,  form.querySelector('[data-key="attend"]').value);
     fd.append(CODES.side,    form.querySelector('[data-key="side"]').value);
     fd.append(CODES.comments,form.querySelector('[data-key="comments"]').value);
-    events.forEach(v => fd.append(CODES.event, v));
+    EVENT_MAP[form.querySelector('[data-key="event"]').value].forEach(v => fd.append(CODES.event, v));
     try {
       await fetch(FORM_RESPONSE, { method:'POST', mode:'no-cors', body: fd });
       form.reset(); status.textContent = '';
