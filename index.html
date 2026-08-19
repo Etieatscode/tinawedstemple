@@ -2,23 +2,15 @@
 <html lang="en">
 <head>
 <!-- ============ SETUP ============
-     Files next to this file:
-       logo.png   = badge
-       photo1.jpg = HER CHOSEN FIRST PIC (save SCH_1386 standing as photo1) → HERO, not repeated
-       photo2.jpg = embrace at wooden door   → gallery "the embrace"
-       photo4.jpg = laughing on sofa         → gallery "the laugh"
-       photo5.jpg = Tina solo                → gallery "the bride"
-       photo6.jpg = Temple solo              → gallery "the groom"
-       photo7.jpg = THE KISS                 → CLOSING (last picture)
-     Hero falls back to the badge if a file is missing (no broken icon).
-
-     PHOTOS SECTION: create the upload Google Form
-       (Q1 "Your name" short answer · Q2 "Your table number (optional)" ·
-        Q3 "Your pictures (max 2)" FILE UPLOAD max 2)
-       → Send → copy link → paste over PHOTO_FORM_URL below. It embeds itself.
-
-     RSVP stays wired to the Sheet. If her form is edited again,
-     regenerate the pre-filled link and update CODES.
+     Files (already renamed on your side):
+       logo.png   = badge            → cover + favicon
+       photo1.jpg = standing (SCH_1386) → hero (first pic, once)
+       photo3.jpg = ring shown on sofa  → gallery wide tile "the ring"
+       photo5.jpg = Tina solo           → gallery "the bride"
+       photo6.jpg = Temple solo         → gallery "the groom"
+       photo7.jpg = the kiss            → closing (last pic) + hashtag
+     RSVP = embedded Google Form (records 100% reliably, no codes to break).
+     After a guest submits, the frame shrinks and the account-numbers banner pops.
 ================================= -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -104,33 +96,18 @@
   .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
   @media(max-width:620px){.gallery{grid-template-columns:1fr}}
   .gallery figure{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--line);margin:0}
+  .gallery figure.wide{grid-column:1/-1}
   .gallery img{width:100%;height:clamp(320px,56vh,600px);object-fit:cover;transition:transform .6s ease}
+  .gallery figure.wide img{height:clamp(360px,64vh,680px)}
   .gallery figure:hover img{transform:scale(1.04)}
   .gallery .cap{position:absolute;left:0;right:0;bottom:0;padding:2.2rem 1rem .9rem;text-align:center;
     font-family:var(--script);font-size:1.6rem;color:#fff;background:linear-gradient(transparent,rgba(40,24,12,.68))}
 
-  /* photos upload — embeds the Google Form once PHOTO_FORM_URL is pasted */
-  .photos-card{max-width:660px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:18px;
-    padding:2.6rem 1.6rem;text-align:center;box-shadow:0 14px 40px rgba(57,65,74,.07)}
-  .photos-card p{color:var(--muted);max-width:460px;margin:0 auto .6rem}
-  .photos-card small{display:block;margin-top:.6rem;color:var(--muted);font-size:.85rem;letter-spacing:.06em}
-  .photo-frame{max-width:760px;margin:0 auto;border-radius:18px;overflow:hidden;border:1px solid var(--line);
+  /* RSVP — embedded Google Form */
+  .rsvp-frame{max-width:760px;margin:0 auto;border-radius:18px;overflow:hidden;border:1px solid var(--line);
     background:#fff;box-shadow:0 14px 40px rgba(57,65,74,.07)}
-  .photo-frame iframe{display:block;width:100%;border:0;height:1050px}
-  @media(max-width:640px){.photo-frame iframe{height:1250px}}
-  .photo-note{display:block;text-align:center;color:var(--muted);font-size:.85rem;padding:.8rem 1rem 1rem}
-
-  .rsvp-card{max-width:660px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:18px;
-    padding:clamp(1.6rem,5vw,3rem);box-shadow:0 14px 40px rgba(57,65,74,.07)}
-  .rsvp-card>p{color:var(--muted);text-align:center;margin-bottom:1.8rem}
-  form{display:grid;gap:1.15rem}
-  label{display:grid;gap:.4rem;font-family:var(--caps);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--brown)}
-  input,select,textarea{font-family:var(--serif);font-size:1.05rem;color:var(--ink);background:#fff;
-    border:1px solid var(--line);border-radius:10px;padding:.65em .85em;width:100%;transition:border-color .2s,box-shadow .2s}
-  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--olive);box-shadow:0 0 0 3px rgba(95,113,65,.16)}
-  textarea{resize:vertical;min-height:88px}
-  .submit{justify-self:center;margin-top:.4rem}
-  .form-status{text-align:center;font-family:var(--caps);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--olive);min-height:1.2em}
+  .gform{display:block;width:100%;border:0;height:1180px;transition:height .6s ease}
+  @media(max-width:640px){.gform{height:1650px}}
   .form-help{margin-top:1.4rem;text-align:center;font-size:1rem;color:var(--muted)}
 
   .gift-banner{max-width:760px;margin:1.4rem auto 0;background:var(--olive);color:#fff;border-radius:16px;
@@ -163,7 +140,6 @@
   .acct .btn.done{animation:none;background:#fff}
   @keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(243,237,230,0)}50%{box-shadow:0 0 0 8px rgba(243,237,230,.14)}}
 
-  /* closing — photo7 last, hashtag exactly as written */
   .closing{max-width:860px;margin:0 auto;text-align:center}
   .closing .frame{border-radius:22px;overflow:hidden;box-shadow:0 24px 60px rgba(57,65,74,.18)}
   .closing img{width:100%;height:clamp(460px,86vh,900px);object-fit:cover;object-position:center 25%}
@@ -189,7 +165,6 @@
   <nav class="site-nav">
     <a href="#details">Details</a>
     <a href="#gallery">Gallery</a>
-    <a href="#photos">Photos</a>
     <a href="#rsvp">RSVP</a>
     <a href="#gift">Cash Gift</a>
   </nav>
@@ -202,11 +177,11 @@
     <a class="scroll-cue" href="#welcome">Scroll<span></span></a>
   </section>
 
-  <!-- ===== HERO — photo1, the first picture she sees ===== -->
+  <!-- ===== HERO — photo1, first and only appearance ===== -->
   <section class="block" id="welcome" style="padding-top:4rem">
     <div class="hero-photo reveal">
       <figure>
-        <img id="heroImg" src="photo1.jpg" fetchpriority="high" alt="Tina and Temple, elegant and poised, together">
+        <img id="heroImg" src="photo1.jpg" fetchpriority="high" alt="Tina and Temple, elegant and poised, standing together">
         <figcaption>
           <p class="names">Tina <span class="amp">&amp;</span> Temple</p>
           <p class="date-line">Saturday, the 19th of September, 2026</p>
@@ -251,7 +226,7 @@
     <p class="fine-note reveal">Access cards admit only one (1) guest</p>
   </section>
 
-  <!-- ===== GALLERY — photo1 not repeated ===== -->
+  <!-- ===== GALLERY — bride + groom, ring wide at the bottom ===== -->
   <section class="block" id="gallery">
     <header class="sec-head reveal">
       <h2 class="sec-title">Gallery</h2>
@@ -259,68 +234,23 @@
       <p class="sec-sub">A few favourites</p>
     </header>
     <div class="gallery">
-      <figure class="reveal"><img src="photo2.jpg" loading="lazy" decoding="async" alt="Temple embracing Tina from behind in front of a wooden door"><figcaption class="cap">the embrace</figcaption></figure>
-      <figure class="reveal"><img src="photo4.jpg" loading="lazy" decoding="async" alt="Tina and Temple laughing together on a cream sofa"><figcaption class="cap">the laugh</figcaption></figure>
       <figure class="reveal"><img src="photo5.jpg" loading="lazy" decoding="async" alt="Tina, radiant in her solo portrait"><figcaption class="cap">the bride</figcaption></figure>
       <figure class="reveal"><img src="photo6.jpg" loading="lazy" decoding="async" alt="Temple, cool in white, leaning by the archway"><figcaption class="cap">the groom</figcaption></figure>
+      <figure class="wide reveal"><img src="photo3.jpg" loading="lazy" decoding="async" alt="Tina and Temple cuddling on a cream sofa, Tina showing her ring"><figcaption class="cap">the ring</figcaption></figure>
     </div>
   </section>
 
-  <!-- ===== PHOTOS — Google Form embeds itself once link is pasted ===== -->
-  <section class="block" id="photos">
-    <header class="sec-head reveal">
-      <h2 class="sec-title">Share Your Photos</h2>
-      <div class="orn" aria-hidden="true"><i></i></div>
-      <p class="sec-sub">wedding pictures, from your phone</p>
-    </header>
-    <div class="photos-card reveal" id="photosComing">
-      <p>Catch a beautiful moment on the day? Upload <strong>up to two pictures</strong> — they go straight into Tina &amp; Temple's shared album.</p>
-      <small>Opening soon — on the day, the same form lives as a QR code on your table tag.</small>
-    </div>
-    <div class="photo-frame reveal" id="photoFrame" hidden>
-      <iframe id="photoIframe" title="Share your photos — upload form" loading="lazy"></iframe>
-      <small class="photo-note">You'll need to be signed into a Google account to upload (Google's rule for file uploads).</small>
-    </div>
-  </section>
-
-  <!-- ===== RSVP ===== -->
+  <!-- ===== RSVP — embedded Google Form ===== -->
   <section class="block" id="rsvp">
     <header class="sec-head reveal">
       <h2 class="sec-title">RSVP</h2>
       <div class="orn" aria-hidden="true"><i></i></div>
       <p class="sec-sub">Join us</p>
     </header>
-    <div class="rsvp-card reveal">
-      <p>Kindly reply as soon as you can.<br>Can't make it? Let us know below — you're still very welcome to send a gift.</p>
-      <form id="rsvpForm">
-        <label>Guest name<input type="text" data-key="names" required autocomplete="name" placeholder="Your full name"></label>
-        <label>Can you attend?
-          <select data-key="attend" required>
-            <option value="" disabled selected>Select</option>
-            <option>Yes,  I'll be there</option>
-            <option>Sorry, can't make it</option>
-          </select>
-        </label>
-        <label>Which event will you attend?
-          <select data-key="event" required>
-            <option value="" disabled selected>Select</option>
-            <option>Church Joining</option>
-            <option>Reception</option>
-            <option>Both</option>
-          </select>
-        </label>
-        <label>Who's guest are you?
-          <select data-key="side" required>
-            <option value="" disabled selected>Select</option>
-            <option>Bride side (Tina)</option>
-            <option>Groom side (Temple)</option>
-          </select>
-        </label>
-        <label>Comments / Questions or Goodwill messages to the couple (optional)<textarea data-key="comments" placeholder="Say something nice…"></textarea></label>
-        <button class="btn primary submit" type="submit">Send RSVP</button>
-        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-      </form>
-      <p class="form-help">Having trouble with the form? Email <a href="mailto:paulcelestina21@gmail.com">paulcelestina21@gmail.com</a> directly.</p>
+    <div class="rsvp-frame reveal">
+      <iframe class="gform"
+        src="https://docs.google.com/forms/d/e/1FAIpQLScbVvM2p-i-fOaLGFrtKmqla0Aq7mELYM_YNHDWCKd2JFL2Og/viewform?embedded=true"
+        title="Tina and Temple wedding RSVP form">Loading…</iframe>
     </div>
 
     <div class="gift-banner" id="giftBanner" hidden>
@@ -332,9 +262,11 @@
       </div>
       <a class="gb-link" href="#gift">See full gift details ↓</a>
     </div>
+
+    <p class="form-help">Having trouble with the form? Email <a href="mailto:paulcelestina21@gmail.com">paulcelestina21@gmail.com</a> directly.</p>
   </section>
 
-  <!-- ===== CASH GIFT — accounts only, registry removed ===== -->
+  <!-- ===== CASH GIFT ===== -->
   <section class="block" id="gift">
     <header class="sec-head reveal">
       <h2 class="sec-title">Cash Gift</h2>
@@ -361,7 +293,7 @@
     </div>
   </section>
 
-  <!-- ===== CLOSING — photo7 is the last picture ===== -->
+  <!-- ===== CLOSING — photo7 (the kiss), last picture ===== -->
   <section class="block">
     <div class="closing reveal">
       <div class="frame"><img src="photo7.jpg" loading="lazy" decoding="async" alt="Tina and Temple sharing a kiss, ring on show"></div>
@@ -379,47 +311,20 @@
   // Hero safety net: missing file → badge instead of broken icon
   document.getElementById('heroImg').addEventListener('error', function(){ this.onerror=null; this.src='logo.png'; });
 
-  // Photos: paste the upload-form link and it embeds itself
-  const PHOTO_FORM_URL = "#"; // ← paste photo-upload Google Form link here
-  if (PHOTO_FORM_URL !== "#") {
-    document.getElementById('photosComing').style.display = 'none';
-    const f = document.getElementById('photoFrame');
-    f.hidden = false;
-    document.getElementById('photoIframe').src = PHOTO_FORM_URL;
-  }
-
-  const FORM_RESPONSE = "https://docs.google.com/forms/d/e/1FAIpQLScbVvM2p-i-fOaLGFrtKmqla0Aq7mELYM_YNHDWCKd2JFL2Og/formResponse";
-  const CODES = {
-    attend:  "entry.877086558",
-    event:   "entry.603892519",
-    names:   "entry.73429514",
-    side:    "entry.2009011009",
-    comments:"entry.2606285"
-  };
-  const EVENT_MAP = { "Church Joining":["Ceremony"], "Reception":["Reception"], "Both":["Ceremony","Reception"] };
-
-  const form = document.getElementById('rsvpForm');
-  const status = document.getElementById('formStatus');
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    status.textContent = 'Sending…';
-    const fd = new FormData();
-    fd.append(CODES.names,   form.querySelector('[data-key="names"]').value);
-    fd.append(CODES.attend,  form.querySelector('[data-key="attend"]').value);
-    fd.append(CODES.side,    form.querySelector('[data-key="side"]').value);
-    fd.append(CODES.comments,form.querySelector('[data-key="comments"]').value);
-    EVENT_MAP[form.querySelector('[data-key="event"]').value].forEach(v => fd.append(CODES.event, v));
-    try {
-      await fetch(FORM_RESPONSE, { method:'POST', mode:'no-cors', body: fd });
-      form.reset(); status.textContent = '';
+  // When a guest submits inside the embedded form → shrink frame + show accounts
+  const frame = document.querySelector('.gform');
+  let loads = 0;
+  frame.addEventListener('load', () => {
+    if (++loads > 1) {
+      frame.style.height = '620px';
       const b = document.getElementById('giftBanner');
-      b.hidden = false; requestAnimationFrame(() => b.classList.add('show'));
-      setTimeout(() => b.scrollIntoView({ behavior:'smooth', block:'center' }), 250);
-    } catch (err) {
-      status.textContent = 'Network error — please email paulcelestina21@gmail.com';
+      b.hidden = false;
+      requestAnimationFrame(() => b.classList.add('show'));
+      setTimeout(() => b.scrollIntoView({ behavior:'smooth', block:'center' }), 300);
     }
   });
 
+  // Tap-to-copy everywhere
   document.querySelectorAll('[data-copy]').forEach(b => {
     b.addEventListener('click', async () => {
       const txt = b.dataset.copy.split(' | ').join('\n');
@@ -431,8 +336,10 @@
     });
   });
 
+  // Gentle reveal on scroll
   const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} }), {threshold:.12});
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
+
