@@ -2,24 +2,19 @@
 <html lang="en">
 <head>
 <!-- ============ SETUP ============
-     Files next to this file:
-       logo.png  = badge
-       photo1.jpg = cuddle on sofa (ring)   → gallery "the ring"
-       photo2.jpg = embrace at wooden door  → gallery "the embrace"
-       photo3.jpg = standing couple         → closing shot
-       photo4.jpg = laughing on sofa        → hero
-       photo5.jpg = Tina solo               → gallery "the bride"
-       photo6.jpg = Temple solo             → gallery "the groom"
+     Files next to this file: logo.png, photo1.jpg … photo6.jpg
+     (compress photos first: squoosh.app — 1600px wide, quality ~78)
 
-     SPEED: compress every photo first (squoosh.app / tinypng.com):
-       resize 1600px wide (hero/closing) or 1200px (gallery), quality ~78.
+     RSVP — 2 OPTIONS:
+     • Works right now: pressing Send opens her Google Form in a new tab.
+     • Invisible in-page submit (recommended): in the Google Form open
+       ⋮ → "Get pre-filled link" → "Get link" → copy that URL and paste it to me
+       (or fill the ENTRIES box below yourself — the entry.XXX values appear in
+       question order: 1 name, 2 attend, 3 count, 4 event, 5 side, 6 diet, 7 note).
 
-     GOOGLE FORM (2 min): Settings → Presentation → Confirmation message →
-     paste: Thank you! Your RSVP is in 💚 To bless the union:
-     FCMB 1018555347 (Celestina Paul) · UBA 2094396896 (Kpoeloo Temple David)
-
-     OFFICIAL DETAILS (per client): Church 9am · Reception 2pm ·
-     Colours: Burgundy, Olive, Beige · Access cards admit 1 guest.
+     PHOTO ALBUM: create a 2nd Google Form with:
+       Q1 "Your name" (short answer) + Q2 "Your pictures" (FILE UPLOAD, max 2 files)
+     → Send → copy link → paste over PHOTO_FORM_URL below.
 ================================= -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +28,8 @@
   :root{
     --paper:#f5f8fb; --card:#fdfdfb; --ink:#39414a; --muted:#6d7580;
     --olive:#5f7141; --olive-deep:#4c5a34; --brown:#52301b;
-    --line:rgba(82,48,27,.16); --sage:#e9eee4; --cream:#f6f1e7;
+    --line:rgba(82,48,27,.16);
+    --burg:#7a1e3a; --olive-sw:#6d7433; --beige:#efd9a9;
     --script:'Pinyon Script',cursive; --caps:'Cinzel',serif; --serif:'Cormorant Garamond',Georgia,serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -43,7 +39,6 @@
   img{max-width:100%;display:block}
   a{color:var(--olive-deep)}
 
-  /* ---------- header ---------- */
   .site-head{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:1rem;
     padding:.8rem clamp(1rem,4vw,2.5rem);background:rgba(245,248,251,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
   .brand{font-family:var(--script);font-size:1.5rem;color:var(--brown);text-decoration:none;line-height:1}
@@ -53,7 +48,6 @@
   .site-nav a:hover{color:var(--olive);border-color:var(--olive)}
   @media(max-width:640px){.site-head{flex-direction:column;gap:.2rem}.site-nav{justify-content:center}}
 
-  /* ---------- LOGO COVER ---------- */
   .cover{height:100vh;height:100svh;display:grid;place-items:center;text-align:center;position:relative;
     background:radial-gradient(circle at 50% 42%,#ffffff 0%,var(--paper) 64%)}
   .cover .emblem{width:min(74vmin,560px);border-radius:50%}
@@ -63,7 +57,6 @@
   .scroll-cue span{width:1px;height:34px;background:linear-gradient(var(--olive),transparent);animation:drop 1.8s ease-in-out infinite}
   @keyframes drop{0%,100%{transform:scaleY(.4);opacity:.4}50%{transform:scaleY(1);opacity:1}}
 
-  /* ---------- hero ---------- */
   .hero-photo{position:relative;max-width:1100px;margin:0 auto;padding:0 1.25rem}
   .hero-photo figure{position:relative;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(57,65,74,.18)}
   .hero-photo img{width:100%;height:clamp(420px,72vh,760px);object-fit:cover;object-position:center 28%}
@@ -81,7 +74,6 @@
   .btn.primary{background:var(--olive);border-color:var(--olive);color:#fff}
   .btn.primary:hover{background:var(--olive-deep);border-color:var(--olive-deep)}
 
-  /* ---------- sections ---------- */
   section.block{max-width:1060px;margin:0 auto;padding:5.5rem 1.25rem}
   .sec-head{text-align:center;margin-bottom:3.2rem}
   .sec-title{font-family:var(--script);font-weight:400;font-size:clamp(2.6rem,6vw,3.6rem);color:var(--brown);line-height:1.2}
@@ -90,12 +82,10 @@
   .orn i{width:7px;height:7px;border-radius:50%;background:var(--olive)}
   .sec-sub{font-family:var(--caps);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--olive)}
 
-  /* ---------- details ---------- */
   .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem}
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:2.3rem 1.6rem;text-align:center;box-shadow:0 14px 40px rgba(57,65,74,.07)}
   .card .glyph{color:var(--olive);font-size:1.1rem}
   .card h3{font-family:var(--caps);font-size:.8rem;letter-spacing:.26em;text-transform:uppercase;color:var(--brown);margin:.7rem 0 .4rem}
-  .card .big{font-family:var(--script);font-size:2.3rem;line-height:1.25;color:var(--olive-deep)}
   .venue{display:inline-block;margin-top:.5rem;font-weight:600;font-size:1.1rem;color:var(--olive-deep);
     text-decoration:underline;text-decoration-color:rgba(95,113,65,.45);text-underline-offset:5px}
   .venue:hover{color:var(--brown);text-decoration-color:var(--brown)}
@@ -104,7 +94,12 @@
   .card p.note{color:var(--muted);font-size:1.05rem;margin-top:.5rem}
   .fine-note{text-align:center;margin-top:2.2rem;font-family:var(--caps);font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted)}
 
-  /* ---------- gallery ---------- */
+  /* colour swatches — like her reference */
+  .swatches{display:flex;justify-content:center;gap:1.8rem;margin-top:1.1rem}
+  .sw{display:grid;justify-items:center;gap:.45rem}
+  .sw .chip{width:46px;height:46px;border-radius:10px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)}
+  .sw p{font-family:var(--caps);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+
   .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
   @media(max-width:620px){.gallery{grid-template-columns:1fr}}
   .gallery figure{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--line);margin:0}
@@ -113,19 +108,28 @@
   .gallery .cap{position:absolute;left:0;right:0;bottom:0;padding:2.2rem 1rem .9rem;text-align:center;
     font-family:var(--script);font-size:1.6rem;color:#fff;background:linear-gradient(transparent,rgba(40,24,12,.68))}
 
-  /* ---------- closing portrait ---------- */
-  .closing{max-width:860px;margin:0 auto;text-align:center}
-  .closing .frame{border-radius:22px;overflow:hidden;box-shadow:0 24px 60px rgba(57,65,74,.18)}
-  .closing img{width:100%;height:clamp(460px,86vh,900px);object-fit:cover;object-position:center 20%}
-  .hashtag{font-family:var(--caps);font-size:.8rem;letter-spacing:.34em;text-transform:uppercase;color:var(--olive);margin-top:1.4rem}
+  /* photo upload */
+  .photos-card{max-width:660px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:2.6rem 1.6rem;text-align:center;box-shadow:0 14px 40px rgba(57,65,74,.07)}
+  .photos-card p{color:var(--muted);max-width:460px;margin:0 auto 1.6rem}
+  .photos-card small{display:block;margin-top:1rem;color:var(--muted);font-size:.85rem;letter-spacing:.06em}
 
-  /* ---------- rsvp ---------- */
-  .rsvp-intro{color:var(--muted);text-align:center;max-width:560px;margin:0 auto 2.4rem}
-  .rsvp-frame{max-width:760px;margin:0 auto;border-radius:18px;overflow:hidden;border:1px solid var(--line);
-    background:#fff;box-shadow:0 14px 40px rgba(57,65,74,.07)}
-  .gform{display:block;width:100%;border:0;height:1560px;transition:height .6s ease}
-  @media(max-width:640px){.gform{height:2100px}}
+  /* native RSVP form */
+  .rsvp-card{max-width:660px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:clamp(1.6rem,5vw,3rem);box-shadow:0 14px 40px rgba(57,65,74,.07)}
+  .rsvp-card>p{color:var(--muted);text-align:center;margin-bottom:1.8rem}
+  form{display:grid;gap:1.15rem}
+  .row{display:grid;gap:1.15rem;grid-template-columns:1fr 1fr}
+  @media(max-width:560px){.row{grid-template-columns:1fr}}
+  label{display:grid;gap:.4rem;font-family:var(--caps);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--brown)}
+  input,select,textarea{font-family:var(--serif);font-size:1.05rem;color:var(--ink);background:#fff;
+    border:1px solid var(--line);border-radius:10px;padding:.65em .85em;width:100%;transition:border-color .2s,box-shadow .2s}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--olive);box-shadow:0 0 0 3px rgba(95,113,65,.16)}
+  textarea{resize:vertical;min-height:88px}
+  .submit{justify-self:center;margin-top:.4rem}
+  .form-status{text-align:center;font-family:var(--caps);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--olive);min-height:1.2em}
   .form-help{margin-top:1.4rem;text-align:center;font-size:1rem;color:var(--muted)}
+
   .gift-banner{max-width:760px;margin:1.4rem auto 0;background:var(--olive);color:#fff;border-radius:16px;
     padding:1.6rem 1.4rem;text-align:center;opacity:0;transform:translateY(12px);transition:opacity .6s,transform .6s}
   .gift-banner.show{opacity:1;transform:none}
@@ -138,7 +142,6 @@
   .gb-chip strong{font-family:var(--caps);letter-spacing:.12em}
   .gb-link{display:inline-block;margin-top:1rem;color:#fff;font-family:var(--caps);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase}
 
-  /* ---------- gift ---------- */
   .gift-note{color:var(--muted);text-align:center;max-width:620px;margin:0 auto 2.4rem;font-size:1.12rem}
   .gift-note strong{color:var(--brown)}
   .gift-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;align-items:stretch}
@@ -162,6 +165,11 @@
   .reg-card a:hover{color:var(--olive-deep)}
   .reg-card p{color:var(--muted);font-size:1rem}
 
+  .closing{max-width:860px;margin:0 auto;text-align:center}
+  .closing .frame{border-radius:22px;overflow:hidden;box-shadow:0 24px 60px rgba(57,65,74,.18)}
+  .closing img{width:100%;height:clamp(460px,86vh,900px);object-fit:cover;object-position:center 20%}
+  .hashtag{font-family:var(--caps);font-size:.8rem;letter-spacing:.34em;text-transform:uppercase;color:var(--olive);margin-top:1.4rem}
+
   footer{text-align:center;padding:4.5rem 1.25rem 3.5rem;border-top:1px solid var(--line)}
   footer .sign{font-family:var(--script);font-size:2.1rem;color:var(--brown)}
   footer .names-small{font-family:var(--caps);font-size:.78rem;letter-spacing:.34em;text-transform:uppercase;color:var(--olive);margin-top:.6rem}
@@ -182,6 +190,7 @@
   <nav class="site-nav">
     <a href="#details">Details</a>
     <a href="#gallery">Gallery</a>
+    <a href="#photos">Photos</a>
     <a href="#rsvp">RSVP</a>
     <a href="#gift">Cash Gift</a>
   </nav>
@@ -189,13 +198,11 @@
 
 <main>
 
-  <!-- ===== LOGO COVER ===== -->
   <section class="cover" id="cover">
     <img class="emblem" src="logo.png" fetchpriority="high" alt="Tina weds Temple — September 19th 2026 monogram badge">
     <a class="scroll-cue" href="#welcome">Scroll<span></span></a>
   </section>
 
-  <!-- ===== HERO ===== -->
   <section class="block" id="welcome" style="padding-top:4rem">
     <div class="hero-photo reveal">
       <figure>
@@ -214,7 +221,6 @@
     </div>
   </section>
 
-  <!-- ===== DETAILS (official) ===== -->
   <section class="block" id="details">
     <header class="sec-head reveal">
       <h2 class="sec-title">Details</h2>
@@ -234,14 +240,17 @@
       </div>
       <div class="card reveal">
         <span class="glyph">✦</span><h3>Colours of the Day</h3>
-        <p class="big">Burgundy · Olive · Beige</p>
+        <div class="swatches">
+          <div class="sw"><span class="chip" style="--c:#7a1e3a"></span><p>Burgundy</p></div>
+          <div class="sw"><span class="chip" style="--c:#6d7433"></span><p>Olive</p></div>
+          <div class="sw"><span class="chip" style="--c:#efd9a9"></span><p>Beige</p></div>
+        </div>
         <p class="note">Wear your favourite shade of the three.</p>
       </div>
     </div>
     <p class="fine-note reveal">Access cards admit only one (1) guest</p>
   </section>
 
-  <!-- ===== GALLERY ===== -->
   <section class="block" id="gallery">
     <header class="sec-head reveal">
       <h2 class="sec-title">Gallery</h2>
@@ -249,37 +258,58 @@
       <p class="sec-sub">A few favourites</p>
     </header>
     <div class="gallery">
-      <figure class="reveal">
-        <img src="photo1.jpg" loading="lazy" decoding="async" alt="Tina and Temple cuddling on a cream sofa, Tina showing her ring">
-        <figcaption class="cap">the ring</figcaption>
-      </figure>
-      <figure class="reveal">
-        <img src="photo2.jpg" loading="lazy" decoding="async" alt="Temple embracing Tina from behind in front of a wooden door">
-        <figcaption class="cap">the embrace</figcaption>
-      </figure>
-      <figure class="reveal">
-        <img src="photo5.jpg" loading="lazy" decoding="async" alt="Tina, radiant in her solo portrait">
-        <figcaption class="cap">the bride</figcaption>
-      </figure>
-      <figure class="reveal">
-        <img src="photo6.jpg" loading="lazy" decoding="async" alt="Temple, cool in white, leaning by the archway">
-        <figcaption class="cap">the groom</figcaption>
-      </figure>
+      <figure class="reveal"><img src="photo1.jpg" loading="lazy" decoding="async" alt="Tina and Temple cuddling on a cream sofa, Tina showing her ring"><figcaption class="cap">the ring</figcaption></figure>
+      <figure class="reveal"><img src="photo2.jpg" loading="lazy" decoding="async" alt="Temple embracing Tina from behind in front of a wooden door"><figcaption class="cap">the embrace</figcaption></figure>
+      <figure class="reveal"><img src="photo5.jpg" loading="lazy" decoding="async" alt="Tina, radiant in her solo portrait"><figcaption class="cap">the bride</figcaption></figure>
+      <figure class="reveal"><img src="photo6.jpg" loading="lazy" decoding="async" alt="Temple, cool in white, leaning by the archway"><figcaption class="cap">the groom</figcaption></figure>
     </div>
   </section>
 
-  <!-- ===== RSVP ===== -->
+  <!-- ===== SHARED PHOTO ALBUM ===== -->
+  <section class="block" id="photos">
+    <header class="sec-head reveal">
+      <h2 class="sec-title">Share Your Photos</h2>
+      <div class="orn" aria-hidden="true"><i></i></div>
+      <p class="sec-sub">wedding pictures, from your phone</p>
+    </header>
+    <div class="photos-card reveal">
+      <p>Catch a beautiful moment on the day? Upload <strong>up to two pictures</strong> — they go straight into Tina &amp; Temple's shared album.</p>
+      <a class="btn primary" id="photoLink" href="#" target="_blank" rel="noopener">Upload your pictures</a>
+      <small>On the day, the same link lives as a QR code on your table tag.</small>
+    </div>
+  </section>
+
+  <!-- ===== RSVP (native — no iframe, no empty space, no cookie junk) ===== -->
   <section class="block" id="rsvp">
     <header class="sec-head reveal">
       <h2 class="sec-title">RSVP</h2>
       <div class="orn" aria-hidden="true"><i></i></div>
       <p class="sec-sub">Join us</p>
     </header>
-    <p class="rsvp-intro reveal">Kindly reply as soon as you can.<br>Can't make it? Let us know below — you're still very welcome to send a gift.</p>
-    <div class="rsvp-frame reveal">
-      <iframe class="gform" loading="lazy"
-        src="https://docs.google.com/forms/d/e/1FAIpQLScbVvM2p-i-fOaLGFrtKmqla0Aq7mELYM_YNHDWCKd2JFL2Og/viewform?embedded=true"
-        title="Tina and Temple wedding RSVP form">Loading…</iframe>
+    <div class="rsvp-card reveal">
+      <p>Kindly reply as soon as you can.<br>Can't make it? Let us know below — you're still very welcome to send a gift.</p>
+      <form id="rsvpForm">
+        <label>Full name<input type="text" data-key="name" required autocomplete="name" placeholder="Your name"></label>
+        <div class="row">
+          <label>Will you attend?
+            <select data-key="attend" required><option value="" disabled selected>Select</option><option>Joyfully accepts</option><option>Regretfully declines</option></select>
+          </label>
+          <label>Number attending<input type="number" data-key="count" min="0" max="5" value="1"></label>
+        </div>
+        <div class="row">
+          <label>Attending which event?
+            <select data-key="event"><option value="" disabled selected>Select</option><option>Church wedding only</option><option>Reception only</option><option>Both</option></select>
+          </label>
+          <label>Whose guest are you?
+            <select data-key="side"><option value="" disabled selected>Select</option><option>Bride's side (Tina)</option><option>Groom's side (Temple)</option></select>
+          </label>
+        </div>
+        <label>Dietary notes (optional)<input type="text" data-key="diet" placeholder="Allergies, vegetarian, etc."></label>
+        <label>A note for the couple (optional)<textarea data-key="note" placeholder="Say something nice…"></textarea></label>
+        <button class="btn primary submit" type="submit">Send RSVP</button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+      <p class="form-help">Having trouble with the form? Email <a href="mailto:tina.temple.wedding@example.com">tina.temple.wedding@example.com</a> directly.</p>
     </div>
 
     <div class="gift-banner" id="giftBanner" hidden>
@@ -291,11 +321,8 @@
       </div>
       <a class="gb-link" href="#gift">See full gift details ↓</a>
     </div>
-
-    <p class="form-help">Having trouble with the form? Email <a href="mailto:tina.temple.wedding@example.com">tina.temple.wedding@example.com</a> directly.</p>
   </section>
 
-  <!-- ===== CASH GIFT ===== -->
   <section class="block" id="gift">
     <header class="sec-head reveal">
       <h2 class="sec-title">Cash Gift</h2>
@@ -324,7 +351,6 @@
     </div>
   </section>
 
-  <!-- ===== CLOSING PORTRAIT ===== -->
   <section class="block">
     <div class="closing reveal">
       <div class="frame"><img src="photo3.jpg" loading="lazy" decoding="async" alt="Tina and Temple, elegant and poised, standing together"></div>
@@ -339,6 +365,37 @@
 </footer>
 
 <script>
+  /* ===== CONFIG =====
+     PHOTO_FORM_URL: paste the photo-upload Google Form link here. */
+  const PHOTO_FORM_URL = "#"; // ← paste photo form link
+  if (PHOTO_FORM_URL !== "#") document.getElementById('photoLink').href = PHOTO_FORM_URL;
+
+  /* ENTRIES: for invisible in-page submit into her Google Form/Sheet.
+     Get them: Google Form → ⋮ → "Get pre-filled link" → "Get link".
+     The entry.XXX values appear in question order:
+     name, attend, count, event, side, diet, note.
+     Leave "" and the button safely opens the form in a new tab instead. */
+  const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScbVvM2p-i-fOaLGFrtKmqla0Aq7mELYM_YNHDWCKd2JFL2Og/viewform";
+  const ENTRIES = { name:"", attend:"", count:"", event:"", side:"", diet:"", note:"" };
+
+  const form = document.getElementById('rsvpForm');
+  const status = document.getElementById('formStatus');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!ENTRIES.name) { window.open(FORM_URL, "_blank"); return; } // fallback until entries pasted
+    status.textContent = 'Sending…';
+    const fd = new FormData();
+    form.querySelectorAll('[data-key]').forEach(el => { if (ENTRIES[el.dataset.key]) fd.append(ENTRIES[el.dataset.key], el.value); });
+    try {
+      await fetch(FORM_URL.replace('/viewform','/formResponse'), { method:'POST', mode:'no-cors', body: fd });
+      form.reset();
+      status.textContent = '';
+      const b = document.getElementById('giftBanner');
+      b.hidden = false; requestAnimationFrame(() => b.classList.add('show'));
+      setTimeout(() => b.scrollIntoView({ behavior:'smooth', block:'center' }), 250);
+    } catch (err) { window.open(FORM_URL, "_blank"); }
+  });
+
   // Tap-to-copy everywhere
   document.querySelectorAll('[data-copy]').forEach(b => {
     b.addEventListener('click', async () => {
@@ -349,19 +406,6 @@
       b.textContent='Copied ✓'; b.classList.add('done');
       setTimeout(()=>{ b.textContent=old; b.classList.remove('done'); },2000);
     });
-  });
-
-  // After RSVP submit → shrink form, reveal account numbers
-  const frame = document.querySelector('.gform');
-  let loads = 0;
-  frame.addEventListener('load', () => {
-    if (++loads > 1) {
-      frame.style.height = '620px';
-      const b = document.getElementById('giftBanner');
-      b.hidden = false;
-      requestAnimationFrame(() => b.classList.add('show'));
-      setTimeout(() => b.scrollIntoView({ behavior:'smooth', block:'center' }), 300);
-    }
   });
 
   // Gentle reveal on scroll
