@@ -5,16 +5,17 @@
      Files next to this file: logo.png, photo1.jpg … photo6.jpg
      (compress photos first: squoosh.app — 1600px wide, quality ~78)
 
-     RSVP — 2 OPTIONS:
-     • Works right now: pressing Send opens her Google Form in a new tab.
-     • Invisible in-page submit (recommended): in the Google Form open
-       ⋮ → "Get pre-filled link" → "Get link" → copy that URL and paste it to me
-       (or fill the ENTRIES box below yourself — the entry.XXX values appear in
-       question order: 1 name, 2 attend, 3 count, 4 event, 5 side, 6 diet, 7 note).
+     TO KILL THE REDIRECT (3 minutes, owner-only):
+       1. Google Form → Settings → Responses → turn OFF "Limit to 1 response"
+          (while it's ON, Google rejects anonymous auto-submits + shows sign-in wall)
+       2. Add the two missing multiple-choice questions:
+            "Which event(s) will you attend?" → Church wedding only / Reception only / Both
+            "Whose guest are you?" → Bride's side (Tina) / Groom's side (Temple)
+       3. ⋮ → "Get pre-filled link" → change nothing → "Get link" → PASTE that URL to me.
+          I fill the ENTRIES box → the site submits invisibly into the Sheet forever.
 
-     PHOTO ALBUM: create a 2nd Google Form with:
-       Q1 "Your name" (short answer) + Q2 "Your pictures" (FILE UPLOAD, max 2 files)
-     → Send → copy link → paste over PHOTO_FORM_URL below.
+     PHOTO ALBUM: new Google Form: "Your name" (short) + "Your table number (optional)"
+     + "Your pictures (max 2)" (FILE UPLOAD, max 2) → paste its Send-link over PHOTO_FORM_URL.
 ================================= -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +30,6 @@
     --paper:#f5f8fb; --card:#fdfdfb; --ink:#39414a; --muted:#6d7580;
     --olive:#5f7141; --olive-deep:#4c5a34; --brown:#52301b;
     --line:rgba(82,48,27,.16);
-    --burg:#7a1e3a; --olive-sw:#6d7433; --beige:#efd9a9;
     --script:'Pinyon Script',cursive; --caps:'Cinzel',serif; --serif:'Cormorant Garamond',Georgia,serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -93,8 +93,6 @@
   .addr small{display:block;font-size:.8rem;letter-spacing:.08em;opacity:.8}
   .card p.note{color:var(--muted);font-size:1.05rem;margin-top:.5rem}
   .fine-note{text-align:center;margin-top:2.2rem;font-family:var(--caps);font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted)}
-
-  /* colour swatches — like her reference */
   .swatches{display:flex;justify-content:center;gap:1.8rem;margin-top:1.1rem}
   .sw{display:grid;justify-items:center;gap:.45rem}
   .sw .chip{width:46px;height:46px;border-radius:10px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)}
@@ -108,13 +106,11 @@
   .gallery .cap{position:absolute;left:0;right:0;bottom:0;padding:2.2rem 1rem .9rem;text-align:center;
     font-family:var(--script);font-size:1.6rem;color:#fff;background:linear-gradient(transparent,rgba(40,24,12,.68))}
 
-  /* photo upload */
   .photos-card{max-width:660px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:18px;
     padding:2.6rem 1.6rem;text-align:center;box-shadow:0 14px 40px rgba(57,65,74,.07)}
   .photos-card p{color:var(--muted);max-width:460px;margin:0 auto 1.6rem}
   .photos-card small{display:block;margin-top:1rem;color:var(--muted);font-size:.85rem;letter-spacing:.06em}
 
-  /* native RSVP form */
   .rsvp-card{max-width:660px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:18px;
     padding:clamp(1.6rem,5vw,3rem);box-shadow:0 14px 40px rgba(57,65,74,.07)}
   .rsvp-card>p{color:var(--muted);text-align:center;margin-bottom:1.8rem}
@@ -265,7 +261,6 @@
     </div>
   </section>
 
-  <!-- ===== SHARED PHOTO ALBUM ===== -->
   <section class="block" id="photos">
     <header class="sec-head reveal">
       <h2 class="sec-title">Share Your Photos</h2>
@@ -279,7 +274,6 @@
     </div>
   </section>
 
-  <!-- ===== RSVP (native — no iframe, no empty space, no cookie junk) ===== -->
   <section class="block" id="rsvp">
     <header class="sec-head reveal">
       <h2 class="sec-title">RSVP</h2>
@@ -289,27 +283,29 @@
     <div class="rsvp-card reveal">
       <p>Kindly reply as soon as you can.<br>Can't make it? Let us know below — you're still very welcome to send a gift.</p>
       <form id="rsvpForm">
-        <label>Full name<input type="text" data-key="name" required autocomplete="name" placeholder="Your name"></label>
+        <label>Email<input type="email" data-key="email" required autocomplete="email" placeholder="your@email.com"></label>
         <div class="row">
-          <label>Will you attend?
-            <select data-key="attend" required><option value="" disabled selected>Select</option><option>Joyfully accepts</option><option>Regretfully declines</option></select>
+          <label>Can you attend?
+            <select data-key="attend" required><option value="" disabled selected>Select</option><option>Yes, I'll be there</option><option>Sorry, can't make it</option></select>
           </label>
-          <label>Number attending<input type="number" data-key="count" min="0" max="5" value="1"></label>
-        </div>
-        <div class="row">
-          <label>Attending which event?
+          <label>Which event(s)?
             <select data-key="event"><option value="" disabled selected>Select</option><option>Church wedding only</option><option>Reception only</option><option>Both</option></select>
           </label>
+        </div>
+        <label>Names of people attending<input type="text" data-key="names" required placeholder="e.g. Mr &amp; Mrs Okorie (2)"></label>
+        <div class="row">
           <label>Whose guest are you?
             <select data-key="side"><option value="" disabled selected>Select</option><option>Bride's side (Tina)</option><option>Groom's side (Temple)</option></select>
           </label>
+          <label>How did you hear about this event?
+            <select data-key="heard"><option value="" disabled selected>Select</option><option>Website</option><option>Friend</option><option>Newsletter</option><option>Advertisement</option></select>
+          </label>
         </div>
-        <label>Dietary notes (optional)<input type="text" data-key="diet" placeholder="Allergies, vegetarian, etc."></label>
-        <label>A note for the couple (optional)<textarea data-key="note" placeholder="Say something nice…"></textarea></label>
+        <label>Comments and/or questions (optional)<textarea data-key="comments" placeholder="Say something nice…"></textarea></label>
         <button class="btn primary submit" type="submit">Send RSVP</button>
         <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
       </form>
-      <p class="form-help">Having trouble with the form? Email <a href="mailto:tina.temple.wedding@example.com">tina.temple.wedding@example.com</a> directly.</p>
+      <p class="form-help">Having trouble with the form? Email <a href="mailto:paulcelestina21@gmail.com">paulcelestina21@gmail.com</a> directly.</p>
     </div>
 
     <div class="gift-banner" id="giftBanner" hidden>
@@ -365,38 +361,35 @@
 </footer>
 
 <script>
-  /* ===== CONFIG =====
-     PHOTO_FORM_URL: paste the photo-upload Google Form link here. */
-  const PHOTO_FORM_URL = "#"; // ← paste photo form link
+  const PHOTO_FORM_URL = "#"; // ← paste photo-upload form link here
   if (PHOTO_FORM_URL !== "#") document.getElementById('photoLink').href = PHOTO_FORM_URL;
 
-  /* ENTRIES: for invisible in-page submit into her Google Form/Sheet.
-     Get them: Google Form → ⋮ → "Get pre-filled link" → "Get link".
-     The entry.XXX values appear in question order:
-     name, attend, count, event, side, diet, note.
-     Leave "" and the button safely opens the form in a new tab instead. */
   const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScbVvM2p-i-fOaLGFrtKmqla0Aq7mELYM_YNHDWCKd2JFL2Og/viewform";
-  const ENTRIES = { name:"", attend:"", count:"", event:"", side:"", diet:"", note:"" };
+  /* The secret per-question codes. Paste them from the pre-filled link, keys:
+     email, attend, names, event, side, heard, comments */
+  const ENTRIES = { email:"", attend:"", names:"", event:"", side:"", heard:"", comments:"" };
 
   const form = document.getElementById('rsvpForm');
   const status = document.getElementById('formStatus');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!ENTRIES.name) { window.open(FORM_URL, "_blank"); return; } // fallback until entries pasted
+    if (!ENTRIES.email) { // temporary fallback until the codes are pasted in
+      status.textContent = 'Opening the official form in a new tab…';
+      window.open(FORM_URL, "_blank");
+      return;
+    }
     status.textContent = 'Sending…';
     const fd = new FormData();
     form.querySelectorAll('[data-key]').forEach(el => { if (ENTRIES[el.dataset.key]) fd.append(ENTRIES[el.dataset.key], el.value); });
     try {
       await fetch(FORM_URL.replace('/viewform','/formResponse'), { method:'POST', mode:'no-cors', body: fd });
-      form.reset();
-      status.textContent = '';
+      form.reset(); status.textContent = '';
       const b = document.getElementById('giftBanner');
       b.hidden = false; requestAnimationFrame(() => b.classList.add('show'));
       setTimeout(() => b.scrollIntoView({ behavior:'smooth', block:'center' }), 250);
     } catch (err) { window.open(FORM_URL, "_blank"); }
   });
 
-  // Tap-to-copy everywhere
   document.querySelectorAll('[data-copy]').forEach(b => {
     b.addEventListener('click', async () => {
       const txt = b.dataset.copy.split(' | ').join('\n');
@@ -408,7 +401,6 @@
     });
   });
 
-  // Gentle reveal on scroll
   const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} }), {threshold:.12});
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
